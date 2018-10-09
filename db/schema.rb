@@ -23,6 +23,6 @@ ActiveRecord::Schema.define(version: 20181009193012) do
     t.datetime "updated_at",   null: false
   end
   
-  #schema did not update. rake db:drop db:create db:migrate 
+  #schema did not update. rake db:drop db:create db:migrate solved the issue of migration not affecting schema
 
 end
