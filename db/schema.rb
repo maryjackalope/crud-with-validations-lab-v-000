@@ -22,5 +22,7 @@ ActiveRecord::Schema.define(version: 20181009193012) do
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
   end
+  
+  #schema did not update. rake db:drop db:create db:migrate 
 
 end
