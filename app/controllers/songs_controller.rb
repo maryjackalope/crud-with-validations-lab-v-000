@@ -1,17 +1,18 @@
-class SongsController <ApplicationController
-  
-  before_action :set_params, only: [:show, :update, :edit, :destroy]
-  
+class SongsController < ApplicationController
   def index
     @songs = Song.all
   end
-  
-  def new 
-    Song.new
+     
+  def new
+    @song = Song.new
   end
-  
+
+  def show
+    @song = Song.find(params[:id])
+  end
+
   def create
-    @song= Song.new(song_params)
+    @song = Song.new(song_params)
     if @song.valid?
       @song.save
       redirect_to song_path(@song)
@@ -19,29 +20,28 @@ class SongsController <ApplicationController
       render :new
     end
   end
+
   def edit
+    @song = Song.find(params[:id])
   end
+
   def update
-    @song.update(song_params)
-    if @song.valid?
-      @song.save
+    @song = Song.find(params[:id])
+    if @song.update(song_params)
       redirect_to song_path(@song)
     else
       render :edit
     end
   end
 
-  def show
-  end
   def destroy
-    @song.destroy
-     redirect_to songs_url
+    Song.find(params[:id]).destroy
+    redirect_to songs_url
   end
-  private
-  def set_params
-    @song = Song.find(params[:id])
-  end
+ 
+ private
+
   def song_params
-    params.require(:song).permit(:title, :released, :release_year, :artist_name, :genre)
+    params.require(:song).permit(:title, :released, :artist_name, :release_year, :genre)
   end
 end
